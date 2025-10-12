@@ -1,3 +1,10 @@
+% Archivo: base_datos.pl
+:- module(base_datos, [
+    pronombre/3,
+    verbo/2,
+    objeto/3,
+    articulo/4
+]).
 % pronombre(Singular/Plural, Español, Inglés)
 
 % --- Singular ---
@@ -15,36 +22,36 @@ pronombre(plural, ellos, they).
 
 % verbo(Inglés, Español)
 
-verbo(eat, comer).
-verbo(drink, beber).
+verbo(eat, come).
+verbo(drink, bebe).
 verbo(go, ir).
-verbo(come, venir).
-verbo(run, correr).
-verbo(walk, caminar).
-verbo(read, leer).
-verbo(write, escribir).
-verbo(speak, hablar).
-verbo(listen, escuchar).
-verbo(see, ver).
-verbo(look, mirar).
-verbo(love, amar).
-verbo(have, tener).
-verbo(want, querer).
-verbo(need, necesitar).
-verbo(play, jugar).
-verbo(open, abrir).
-verbo(close, cerrar).
-verbo(cook, cocinar).
-verbo(sing, cantar).
-verbo(dance, bailar).
-verbo(sleep, dormir).
-verbo(study, estudiar).
-verbo(work, trabajar).
-verbo(travel, viajar).
-verbo(buy, comprar).
-verbo(sell, vender).
-verbo(teach, enseñar).
-verbo(learn, aprender).
+verbo(come, viene).
+verbo(run, corre).
+verbo(walk, camina).
+verbo(read, lee).
+verbo(write, escribe).
+verbo(speak, habla).
+verbo(listen, escucha).
+verbo(see, ve).
+verbo(look, mira).
+verbo(love, ama).
+verbo(have, tiene).
+verbo(want, quiere).
+verbo(need, necesita).
+verbo(play, juega).
+verbo(open, abre).
+verbo(close, cierra).
+verbo(cook, cocina).
+verbo(sing, canta).
+verbo(dance, baila).
+verbo(sleep, duerme).
+verbo(study, estudia).
+verbo(work, trabaja).
+verbo(travel, viaja).
+verbo(buy, compra).
+verbo(sell, vende).
+%verbo(teach, enseñar).
+verbo(learn, aprende).
 
 % objeto(Singular/Plural,Inglés, Español)
 
