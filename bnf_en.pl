@@ -18,72 +18,81 @@
    === Oraciones declarativas ===
    ========================== */
 
-oracion_en(sujeto(S), predicado(P)) --> sujeto_en(S), predicado_en(P).
+oracion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, Comp))) -->
+    sujeto_en(Num, Per, S),
+    predicado_en(Num, Per, Verbo, Comp), !.
 
-sujeto_en(pronombre(Pron)) -->
+/* ========= Sujeto ========= */
+
+sujeto_en(Num, Per, Pron) -->
     [Palabra],
-    { pronombre(_, _, Palabra), Pron = Palabra }.
+    { pronombre(Num, Per, _, _, Palabra),
+      Pron = Palabra }, !.
 
-sujeto_en(articulo_sustantivo(Art, Sust)) -->
-    articulo_en(Art),
-    sustantivo_en(Sust).
+sujeto_en(singular, tercera, Sust) -->
+    articulo_en(_),
+    sustantivo_en(Sust), !.
 
-sujeto_en(articulo_sustantivo_plural(Art, SustP)) -->
-    articulo_en(Art),
-    sustantivo_plural_en(SustP).
+sujeto_en(plural, tercera, SustP) -->
+    articulo_en(_),
+    sustantivo_plural_en(SustP), !.
 
-predicado_en(verbo_objeto(Verbo, Comp)) -->
-    verbo_en(Verbo),
-    complemento_en(Comp).
+/* ========= Predicado ========= */
+
+predicado_en(Num, Per, Verbo, Comp) -->
+    verbo_en(Num, Per, Verbo),
+    complemento_en(Comp), !.
+
+/* ========= Complementos ========= */
 
 complemento_en(articulo_sustantivo(Art, Sust)) -->
     articulo_en(Art),
-    sustantivo_en(Sust).
-
-complemento_en(articulo_sustantivo_plural(Art, SustP)) -->
-    articulo_en(Art),
-    sustantivo_plural_en(SustP).
-
-complemento_en(sustantivo(Sust)) -->
-    sustantivo_en(Sust).
+    sustantivo_en(Sust), !.
 
 complemento_en(sustantivo_plural(SustP)) -->
-    sustantivo_plural_en(SustP).
+    sustantivo_plural_en(SustP), !.
+
+/* ========= Artículos / Sustantivos ========= */
 
 articulo_en(Art) -->
     [Palabra],
-    { articulo(_, _, _, Palabra), Art = Palabra }.
+    { articulo(_, _, _, Palabra), Art = Palabra }, !.
 
 sustantivo_en(Sust) -->
     [Palabra],
-    { objeto(singular, Palabra, _), Sust = Palabra }.
+    { objeto(singular, Palabra, _), Sust = Palabra }, !.
 
 sustantivo_plural_en(SustP) -->
     [Palabra],
-    { objeto(plural, Palabra, _), SustP = Palabra }.
+    { objeto(plural, Palabra, _), SustP = Palabra }, !.
 
-verbo_en(Verbo) -->
+/* ========= Verbos ========= */
+
+verbo_en(Num, Per, Verbo) -->
     [Palabra],
-    { verbo(Palabra, _), Verbo = Palabra }.
+    { verbo(Palabra, Num, Per, _), Verbo = Palabra }, !.
 
 /* ==========================
    === Preguntas ===
    ========================== */
 
 % Ej: Does he eat apples ?
-pregunta_en(auxiliar(Aux), sujeto(S), verbo(V), complemento(C)) -->
+pregunta_en(auxiliar(Aux), sujeto(Num, Per, S), Verbo, sustantivo_plural(Complemento)) -->
     [Aux],
-    { member(Aux, [do, does]) },
-    sujeto_en(S),
-    verbo_en(V),
-    complemento_en(C),
-    [?].
+    { member(Aux, [do, does]),
+      (Aux = does -> Num = singular, Per = tercera ; true) },
+    sujeto_en(Num, Per, S),
+    verbo_en(Num, Per, Verbo),
+    sustantivo_plural_en(Complemento),
+    [?], !.
 
 /* ==========================
    === Exclamaciones ===
    ========================== */
 
-% Ej: She eats apples !
-exclamacion_en(sujeto(S), predicado(P), exclamacion) -->
-    oracion_en(S, P),
-    [!].
+% Ej: She eat apples !
+exclamacion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, sustantivo_plural(Comp))), exclamacion) -->
+    sujeto_en(Num, Per, S),
+    verbo_en(Num, Per, Verbo),
+    sustantivo_plural_en(Comp),
+    ["!"], !. % Los de exclamacion van con comillas ya que prolog no reconoce ¡ y ! lo toma como corte

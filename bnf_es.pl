@@ -18,81 +18,92 @@
    === Oraciones declarativas ===
    ========================== */
 
-oracion_es(sujeto(S), predicado(P)) --> sujeto_es(S), predicado_es(P).
+oracion_es(sujeto(Numero, Persona, Suj), predicado(verbo_objeto(Verbo, Comp))) -->
+    sujeto_es(Numero, Persona, Suj),
+    predicado_es(Numero, Persona, Verbo, Comp), !.
 
-sujeto_es(pronombre(Pron)) --> 
+/* ========= Sujeto ========= */
+
+% Pronombres personales: yo, tú, él...
+sujeto_es(Numero, Persona, Pron) -->
     [Palabra],
-    { pronombre(_, Pron, Palabra) }.
+    { pronombre(Numero, Persona, _, Palabra, _),
+      Pron = Palabra }, !.
 
-sujeto_es(articulo_sustantivo(Art, Sust)) -->
+% Artículo + sustantivo singular
+sujeto_es(singular, tercera, Sust) -->
     articulo_es(Art),
-    sustantivo_es(Sust).
+    sustantivo_es(Sust),
+    { Art \= el }, !. % Evita conflicto con pronombre 'el'
 
-sujeto_es(articulo_sustantivo_plural(Art, SustP)) -->
-    articulo_es(Art),
-    sustantivo_plural_es(SustP).
+% Artículo + sustantivo plural
+sujeto_es(plural, tercera, SustP) -->
+    articulo_es(_),
+    sustantivo_plural_es(SustP), !.
 
-predicado_es(verbo_objeto(Verbo, Comp)) -->
-    verbo_es(Verbo),
-    complemento_es(Comp).
+/* ========= Predicado ========= */
+
+predicado_es(Numero, Persona, Verbo, Comp) -->
+    verbo_es(Numero, Persona, Verbo),
+    complemento_es(Comp), !.
+
+/* ========= Complementos ========= */
 
 complemento_es(articulo_sustantivo(Art, Sust)) -->
     articulo_es(Art),
-    sustantivo_es(Sust).
-
-complemento_es(articulo_sustantivo_plural(Art, SustP)) -->
-    articulo_es(Art),
-    sustantivo_plural_es(SustP).
-
-complemento_es(sustantivo(Sust)) -->
-    sustantivo_es(Sust).
+    sustantivo_es(Sust), !.
 
 complemento_es(sustantivo_plural(SustP)) -->
-    sustantivo_plural_es(SustP).
+    sustantivo_plural_es(SustP), !.
+
+/* ========= Artículos / Sustantivos ========= */
 
 articulo_es(Art) -->
     [Palabra],
-    { articulo(_, _, Palabra, _), Art = Palabra }.
+    { articulo(_, _, Palabra, _), Art = Palabra }, !.
 
 sustantivo_es(Sust) -->
     [Palabra],
-    { objeto(singular, _, Palabra), Sust = Palabra }.
+    { objeto(singular, _, Palabra), Sust = Palabra }, !.
 
 sustantivo_plural_es(SustP) -->
     [Palabra],
-    { objeto(plural, _, Palabra), SustP = Palabra }.
+    { objeto(plural, _, Palabra), SustP = Palabra }, !.
 
-verbo_es(Verbo) -->
+/* ========= Verbos ========= */
+
+verbo_es(Numero, Persona, Verbo) -->
     [Palabra],
-    { verbo(_, Palabra), Verbo = Palabra }.
+    { verbo(_, Numero, Persona, Palabra), Verbo = Palabra }, !.
 
 /* ==========================
    === Preguntas ===
    ========================== */
 
 % Ej: ¿Ella come manzanas?
-pregunta_es(sujeto(S), verbo(V), complemento(C)) -->
+pregunta_es(sujeto(Numero, Persona, S), Verbo, sustantivo_plural(Complemento)) -->
     ["¿"],
-    sujeto_es(S),
-    verbo_es(V),
-    complemento_es(C),
-    [?].
+    sujeto_es(Numero, Persona, S),
+    verbo_es(Numero, Persona, Verbo),
+    sustantivo_plural_es(Complemento),
+    [?], !.
 
-% Ej: ¿Come ella manzanas?
-pregunta_es(verbo(V), sujeto(S), complemento(C)) -->
+% Ej: ¿Comes tú manzanas?
+pregunta_es(Verbo, sujeto(Numero, Persona, S), sustantivo_plural(Complemento)) -->
     ["¿"],
-    verbo_es(V),
-    sujeto_es(S),
-    complemento_es(C),
-    [?].
+    verbo_es(Numero, Persona, Verbo),
+    sujeto_es(Numero, Persona, S),
+    sustantivo_plural_es(Complemento),
+    [?], !.
 
 /* ==========================
    === Exclamaciones ===
    ========================== */
 
 % Ej: ¡Ella come manzanas!
-exclamacion_es(sujeto(S), predicado(P), exclamacion) -->
+exclamacion_es(sujeto(Numero, Persona, S), predicado(verbo_objeto(Verbo, sustantivo_plural(Comp))), exclamacion) -->
     ["¡"],
-    oracion_es(S, P),
-    [!].
-
+    sujeto_es(Numero, Persona, S),
+    verbo_es(Numero, Persona, Verbo),
+    sustantivo_plural_es(Comp),
+    ["!"], !. % Los de exclamacion van con comillas ya que prolog no reconoce ¡ y ! lo toma como corte
