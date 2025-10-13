@@ -19,6 +19,9 @@ pronombre(singular, segunda, neutro, tu, you).
 pronombre(singular, tercera, masculino, el, he).
 pronombre(singular, tercera, femenino, ella, she).
 pronombre(singular, tercera, neutro, eso, it).
+pronombre(singular, tercera, neutro, usted, you).
+pronombre(singular, tercera, neutro, ello, it).
+pronombre(singular, tercera, neutro, le, it).
 
 % --- Plural ---
 pronombre(plural, primera, neutro, nosotros, we).
@@ -258,6 +261,15 @@ objeto(singular, bread, pan).
 objeto(singular, dog, perro).
 objeto(singular, cat, gato).
 objeto(singular, food, comida).
+objeto(singular, friend, amigo).
+objeto(singular, family, familia).
+objeto(singular, city, ciudad).
+objeto(singular, country, pais).
+objeto(singular, job, trabajo).
+objeto(singular, movie, pelicula).
+objeto(singular, song, cancion).
+objeto(singular, game, juego).
+objeto(singular, computer, computadora).
 
 % --- Plural ---
 objeto(plural, apples, manzanas).
@@ -280,6 +292,16 @@ objeto(plural, breads, panes).
 objeto(plural, dogs, perros).
 objeto(plural, cats, gatos).
 objeto(plural, foods, comidas).
+objeto(plural, friends, amigos).
+objeto(plural, families, familias).
+objeto(plural, cities, ciudades).
+objeto(plural, countries, paises).
+objeto(plural, jobs, trabajos).
+objeto(plural, movies, peliculas).
+objeto(plural, songs, canciones).
+objeto(plural, games, juegos).
+objeto(plural, computers, computadoras).
+
 
 % articulo(definido/Indefinido, singular/plural, Inglés, Español)
 
