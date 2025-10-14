@@ -46,21 +46,29 @@ pregunta_es(Verbo, sujeto(Num, Per, S), Comp) -->
     complemento_es(Comp), [?], !.
 
 /* ==========================
-   === PREGUNTAS WH (Multi-aridad para tests) ===
+   === PREGUNTAS WH ===
    ========================== */
 
-% //4 para test _1: ¿Qué come ella? (Wh, Verbo, S, Comp - Comp opcional)
-pregunta_wh_es(WhWord, Verbo, S, Comp) -->
+% //4: ¿Qué come ella manzanas? (Wh, V, S, C)
+pregunta_wh_es(WhWord, Verbo, Sujeto, Comp) -->
     ["¿"], [WhWord], { interrogativo(WhWord, _) },
     verbo_es(singular, tercera, Verbo),
-    sujeto_es(singular, tercera, S),
-    ( complemento_es(Comp) ; [] ), [?], !.
+    sujeto_es(singular, tercera, Sujeto),
+    complemento_es(Comp), [?], !.
 
-% //3 para test _2 y verifica: ¿Quién come manzanas? (Wh, Verbo, Comp)
+% //3: ¿Quién come manzanas? (Wh, V, Comp)
 pregunta_wh_es(WhWord, Verbo, Comp) -->
     ["¿"], [WhWord], { interrogativo(WhWord, _) },
     verbo_es(singular, tercera, Verbo),
     complemento_es(Comp), [?], !.
+
+% //3: ¿Qué come ella? (Wh, V, Sujeto)
+pregunta_wh_es(WhWord, Verbo, Sujeto) -->
+    ["¿"], [WhWord], { interrogativo(WhWord, _) },
+    verbo_es(singular, tercera, Verbo),
+    sujeto_es(singular, tercera, Sujeto),
+    [?], !.
+
 
 /* ==========================
    === Exclamaciones ===
