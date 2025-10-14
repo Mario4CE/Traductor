@@ -3,7 +3,8 @@
     pronombre/5,
     verbo/4,
     objeto/3,
-    articulo/4
+    articulo/4,
+    interrogativo/2
 ]).
 
 /* ============================
@@ -316,3 +317,15 @@ articulo(indefinido, singular, un, a).
 articulo(indefinido, singular, una, a).
 articulo(indefinido, plural, unos, some).
 articulo(indefinido, plural, unas, some).
+
+/* ============================
+   === Palabras Interrogativas ===
+   interrogativo(Español, Inglés)
+   ============================ */
+
+interrogativo(que, what).
+interrogativo(donde, where).
+interrogativo(cuando, when).
+interrogativo(quien, who).
+interrogativo(por_que, why).
+interrogativo(como, how).

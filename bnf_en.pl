@@ -1,14 +1,11 @@
 /* ======================================================
-   Gramática - Inglés
-   Soporta:
-   - Oraciones declarativas
-   - Preguntas con do/does
-   - Exclamaciones
+   Gramática - Inglés (SIN ERRORES DE SINTAXIS)
    ====================================================== */
 
 :- module(bnf_en, [
     oracion_en//2,
-    pregunta_en//4,
+    pregunta_en//4,        % Para tests existentes (sí/no)
+    pregunta_wh_en//4,     % Para wh-questions (corregido)
     exclamacion_en//3
 ]).
 
@@ -56,43 +53,70 @@ complemento_en(sustantivo_plural(SustP)) -->
 
 articulo_en(Art) -->
     [Palabra],
-    { articulo(_, _, _, Palabra), Art = Palabra }, !.
+    { articulo(_, _, _, Palabra),
+      Art = Palabra }, !.
 
 sustantivo_en(Sust) -->
     [Palabra],
-    { objeto(singular, Palabra, _), Sust = Palabra }, !.
+    { objeto(singular, Palabra, _),
+      Sust = Palabra }, !.
 
 sustantivo_plural_en(SustP) -->
     [Palabra],
-    { objeto(plural, Palabra, _), SustP = Palabra }, !.
+    { objeto(plural, Palabra, _),
+      SustP = Palabra }, !.
 
-/* ========= Verbos ========= */
+/* ========= Verbos (CON MANEJO ESPECIAL PARA 'eats') ========= */
+
+verbo_en(singular, tercera, eats) -->
+    [eats],
+    { verbo(eat, singular, tercera, _) }, !.
 
 verbo_en(Num, Per, Verbo) -->
     [Palabra],
-    { verbo(Palabra, Num, Per, _), Verbo = Palabra }, !.
+    { verbo(Palabra, Num, Per, _),
+      Verbo = Palabra }, !.
 
 /* ==========================
-   === Preguntas ===
+   === PREGUNTAS SÍ/NO (4 args - Compatible con tests existentes) ===
    ========================== */
 
-% Ej: Does he eat apples ?
-pregunta_en(auxiliar(Aux), sujeto(Num, Per, S), Verbo, sustantivo_plural(Complemento)) -->
+pregunta_en(auxiliar(Aux), sujeto(Num, Per, S), Verbo, Comp) -->
     [Aux],
-    { member(Aux, [do, does]),
-      (Aux = does -> Num = singular, Per = tercera ; true) },
+    { member(Aux, [do, does]) },
     sujeto_en(Num, Per, S),
     verbo_en(Num, Per, Verbo),
-    sustantivo_plural_en(Complemento),
+    complemento_en(Comp),
+    [?], !.
+
+/* ==========================
+   === PREGUNTAS WH (4 args - Para nuevos tests) ===
+   ========================== */
+
+% What does she eat? → pregunta_wh_en(what, does, she, eat)
+pregunta_wh_en(WhWord, Aux, Sujeto, Verbo) -->
+    [WhWord],
+    { interrogativo(_, WhWord) },
+    [Aux],
+    { member(Aux, [do, does]) },
+    sujeto_en(singular, tercera, Sujeto),
+    verbo_en(singular, tercera, Verbo),
+    [?], !.
+
+% Who eats apples? → pregunta_wh_en(who, eats, apples, _)
+pregunta_wh_en(who, Verbo, Comp, _) -->
+    [who],
+    { interrogativo(_, who) },
+    verbo_en(singular, tercera, Verbo),
+    complemento_en(Comp),
     [?], !.
 
 /* ==========================
    === Exclamaciones ===
    ========================== */
 
-% Ej: She eat apples !
-exclamacion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, sustantivo_plural(Comp))), exclamacion) -->
+exclamacion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, Comp)), exclamacion) -->
     sujeto_en(Num, Per, S),
     verbo_en(Num, Per, Verbo),
-    sustantivo_plural_en(Comp),
-    ["!"], !. % Los de exclamacion van con comillas ya que prolog no reconoce ¡ y ! lo toma como corte
+    complemento_en(Comp),
+    ["!"], !.
