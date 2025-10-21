@@ -17,7 +17,8 @@
 
 oracion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, Comp))) -->
     sujeto_en(Num, Per, S),
-    predicado_en(Num, Per, Verbo, Comp), !.
+    predicado_en(Num, Per, Verbo, Comp),
+    { validar_coherencia_semantica_en(Verbo, Comp) }, !.
 
 /* ========= Sujeto ========= */
 
@@ -27,11 +28,11 @@ sujeto_en(Num, Per, Pron) -->
       Pron = Palabra }, !.
 
 sujeto_en(singular, tercera, Sust) -->
-    articulo_en(_),
+    articulo_en(singular),
     sustantivo_en(Sust), !.
 
 sujeto_en(plural, tercera, SustP) -->
-    articulo_en(_),
+    articulo_en(plural),
     sustantivo_plural_en(SustP), !.
 
 /* ========= Predicado ========= */
@@ -42,19 +43,32 @@ predicado_en(Num, Per, Verbo, Comp) -->
 
 /* ========= Complementos ========= */
 
-complemento_en(articulo_sustantivo(Art, Sust)) -->
-    articulo_en(Art),
+% El artículo "the" puede usarse con singular o plural
+complemento_en(articulo_sustantivo(Sust)) -->
+    [the],
     sustantivo_en(Sust), !.
+
+complemento_en(articulo_sustantivo(SustP)) -->
+    [the],
+    sustantivo_plural_en(SustP), !.
+
+% Artículos específicos (a, an, some)
+complemento_en(articulo_sustantivo(Sust)) -->
+    articulo_en(singular),
+    sustantivo_en(Sust), !.
+
+complemento_en(articulo_sustantivo(SustP)) -->
+    articulo_en(plural),
+    sustantivo_plural_en(SustP), !.
 
 complemento_en(sustantivo_plural(SustP)) -->
     sustantivo_plural_en(SustP), !.
 
 /* ========= Artículos / Sustantivos ========= */
 
-articulo_en(Art) -->
+articulo_en(Num) -->
     [Palabra],
-    { articulo(_, _, _, Palabra),
-      Art = Palabra }, !.
+    { articulo(_, Num, _, Palabra), Palabra \= the }, !.
 
 sustantivo_en(Sust) -->
     [Palabra],
@@ -77,6 +91,23 @@ verbo_en(Num, Per, Verbo) -->
     { verbo(Palabra, Num, Per, _),
       Verbo = Palabra }, !.
 
+/* ============================
+   === Validación Semántica (Inglés) ===
+   ============================ */
+
+validar_coherencia_semantica_en(Verbo, Comp) :-
+    extraer_objeto_complemento_en(Comp, Objeto),
+    obtener_raiz_verbo_en(Verbo, RaizVerbo),
+    % Si el objeto tiene categoría, debe ser compatible
+    \+ (categoria_semantica(Objeto, Categoria),
+        \+ compatible_verbo_objeto(RaizVerbo, Categoria)).
+
+extraer_objeto_complemento_en(articulo_sustantivo(Sust), Sust).
+extraer_objeto_complemento_en(sustantivo_plural(Sust), Sust).
+
+obtener_raiz_verbo_en(eats, eat) :- !.
+obtener_raiz_verbo_en(Verbo, Verbo).
+
 /* ==========================
    === PREGUNTAS SÍ/NO (4 args - Compatible con tests existentes) ===
    ========================== */
@@ -87,6 +118,7 @@ pregunta_en(auxiliar(Aux), sujeto(Num, Per, S), Verbo, Comp) -->
     sujeto_en(Num, Per, S),
     verbo_en(Num, Per, Verbo),
     complemento_en(Comp),
+    { validar_coherencia_semantica_en(Verbo, Comp) },
     [?], !.
 
 /* ==========================
@@ -109,6 +141,7 @@ pregunta_wh_en(who, Verbo, Comp, _) -->
     { interrogativo(_, who) },
     verbo_en(singular, tercera, Verbo),
     complemento_en(Comp),
+    { validar_coherencia_semantica_en(Verbo, Comp) },
     [?], !.
 
 /* ==========================
@@ -119,4 +152,5 @@ exclamacion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, Comp)), exclam
     sujeto_en(Num, Per, S),
     verbo_en(Num, Per, Verbo),
     complemento_en(Comp),
+    { validar_coherencia_semantica_en(Verbo, Comp) },
     ["!"], !.

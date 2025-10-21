@@ -4,7 +4,9 @@
     verbo/4,
     objeto/3,
     articulo/4,
-    interrogativo/2
+    interrogativo/2,
+    categoria_semantica/2,
+    compatible_verbo_objeto/2
 ]).
 
 /* ============================
@@ -329,3 +331,230 @@ interrogativo(cuando, when).
 interrogativo(quien, who).
 interrogativo(por_que, why).
 interrogativo(como, how).
+
+/* ============================
+   === Categorías Semánticas ===
+   categoria_semantica(Objeto, Categoria)
+   ============================ */
+
+% Comida
+categoria_semantica(apple, comida).
+categoria_semantica(apples, comida).
+categoria_semantica(manzana, comida).
+categoria_semantica(manzanas, comida).
+categoria_semantica(bread, comida).
+categoria_semantica(breads, comida).
+categoria_semantica(pan, comida).
+categoria_semantica(panes, comida).
+categoria_semantica(water, bebida).
+categoria_semantica(waters, bebida).
+categoria_semantica(agua, bebida).
+categoria_semantica(aguas, bebida).
+categoria_semantica(food, comida).
+categoria_semantica(foods, comida).
+categoria_semantica(comida, comida).
+categoria_semantica(comidas, comida).
+
+% Objetos inanimados
+categoria_semantica(book, objeto_inanimado).
+categoria_semantica(books, objeto_inanimado).
+categoria_semantica(libro, objeto_inanimado).
+categoria_semantica(libros, objeto_inanimado).
+categoria_semantica(door, objeto_inanimado).
+categoria_semantica(doors, objeto_inanimado).
+categoria_semantica(puerta, objeto_inanimado).
+categoria_semantica(puertas, objeto_inanimado).
+categoria_semantica(window, objeto_inanimado).
+categoria_semantica(windows, objeto_inanimado).
+categoria_semantica(ventana, objeto_inanimado).
+categoria_semantica(ventanas, objeto_inanimado).
+categoria_semantica(ball, objeto_inanimado).
+categoria_semantica(balls, objeto_inanimado).
+categoria_semantica(pelota, objeto_inanimado).
+categoria_semantica(pelotas, objeto_inanimado).
+categoria_semantica(car, objeto_inanimado).
+categoria_semantica(cars, objeto_inanimado).
+categoria_semantica(carro, objeto_inanimado).
+categoria_semantica(carros, objeto_inanimado).
+categoria_semantica(house, objeto_inanimado).
+categoria_semantica(houses, objeto_inanimado).
+categoria_semantica(casa, objeto_inanimado).
+categoria_semantica(casas, objeto_inanimado).
+categoria_semantica(table, objeto_inanimado).
+categoria_semantica(tables, objeto_inanimado).
+categoria_semantica(mesa, objeto_inanimado).
+categoria_semantica(mesas, objeto_inanimado).
+categoria_semantica(chair, objeto_inanimado).
+categoria_semantica(chairs, objeto_inanimado).
+categoria_semantica(silla, objeto_inanimado).
+categoria_semantica(sillas, objeto_inanimado).
+categoria_semantica(pencil, objeto_inanimado).
+categoria_semantica(pencils, objeto_inanimado).
+categoria_semantica(lapiz, objeto_inanimado).
+categoria_semantica(lapices, objeto_inanimado).
+categoria_semantica(pen, objeto_inanimado).
+categoria_semantica(pens, objeto_inanimado).
+categoria_semantica(boligrafo, objeto_inanimado).
+categoria_semantica(boligrafos, objeto_inanimado).
+categoria_semantica(phone, objeto_inanimado).
+categoria_semantica(phones, objeto_inanimado).
+categoria_semantica(telefono, objeto_inanimado).
+categoria_semantica(telefonos, objeto_inanimado).
+categoria_semantica(computer, objeto_inanimado).
+categoria_semantica(computers, objeto_inanimado).
+categoria_semantica(computadora, objeto_inanimado).
+categoria_semantica(computadoras, objeto_inanimado).
+
+% Lugares
+categoria_semantica(school, lugar).
+categoria_semantica(schools, lugar).
+categoria_semantica(escuela, lugar).
+categoria_semantica(escuelas, lugar).
+categoria_semantica(city, lugar).
+categoria_semantica(cities, lugar).
+categoria_semantica(ciudad, lugar).
+categoria_semantica(ciudades, lugar).
+categoria_semantica(country, lugar).
+categoria_semantica(countries, lugar).
+categoria_semantica(pais, lugar).
+categoria_semantica(paises, lugar).
+
+% Seres vivos (animales)
+categoria_semantica(dog, animal).
+categoria_semantica(dogs, animal).
+categoria_semantica(perro, animal).
+categoria_semantica(perros, animal).
+categoria_semantica(cat, animal).
+categoria_semantica(cats, animal).
+categoria_semantica(gato, animal).
+categoria_semantica(gatos, animal).
+
+% Personas
+categoria_semantica(teacher, persona).
+categoria_semantica(teachers, persona).
+categoria_semantica(maestro, persona).
+categoria_semantica(maestros, persona).
+categoria_semantica(student, persona).
+categoria_semantica(students, persona).
+categoria_semantica(estudiante, persona).
+categoria_semantica(estudiantes, persona).
+categoria_semantica(friend, persona).
+categoria_semantica(friends, persona).
+categoria_semantica(amigo, persona).
+categoria_semantica(amigos, persona).
+categoria_semantica(family, persona).
+categoria_semantica(families, persona).
+categoria_semantica(familia, persona).
+categoria_semantica(familias, persona).
+
+% Abstractos
+categoria_semantica(job, abstracto).
+categoria_semantica(jobs, abstracto).
+categoria_semantica(trabajo, abstracto).
+categoria_semantica(trabajos, abstracto).
+categoria_semantica(movie, entretenimiento).
+categoria_semantica(movies, entretenimiento).
+categoria_semantica(pelicula, entretenimiento).
+categoria_semantica(peliculas, entretenimiento).
+categoria_semantica(song, entretenimiento).
+categoria_semantica(songs, entretenimiento).
+categoria_semantica(cancion, entretenimiento).
+categoria_semantica(canciones, entretenimiento).
+categoria_semantica(game, entretenimiento).
+categoria_semantica(games, entretenimiento).
+categoria_semantica(juego, entretenimiento).
+categoria_semantica(juegos, entretenimiento).
+
+/* ============================
+   === Compatibilidad Verbo-Objeto ===
+   compatible_verbo_objeto(Verbo, CategoriaObjeto)
+   Define qué verbos son compatibles con qué categorías
+   ============================ */
+
+% Comer - solo comida/bebida
+compatible_verbo_objeto(eat, comida).
+compatible_verbo_objeto(eat, bebida).
+
+% Beber - solo bebida
+compatible_verbo_objeto(drink, bebida).
+
+% Leer - objetos con texto
+compatible_verbo_objeto(read, objeto_inanimado).  % libros, etc.
+compatible_verbo_objeto(read, entretenimiento).
+
+% Escribir - puede escribir objetos
+compatible_verbo_objeto(write, objeto_inanimado).
+
+% Ver - casi todo
+compatible_verbo_objeto(see, persona).
+compatible_verbo_objeto(see, animal).
+compatible_verbo_objeto(see, objeto_inanimado).
+compatible_verbo_objeto(see, lugar).
+compatible_verbo_objeto(see, entretenimiento).
+
+% Mirar - casi todo
+compatible_verbo_objeto(look, persona).
+compatible_verbo_objeto(look, animal).
+compatible_verbo_objeto(look, objeto_inanimado).
+compatible_verbo_objeto(look, lugar).
+compatible_verbo_objeto(look, entretenimiento).
+
+% Amar - personas, animales, cosas
+compatible_verbo_objeto(love, persona).
+compatible_verbo_objeto(love, animal).
+compatible_verbo_objeto(love, objeto_inanimado).
+compatible_verbo_objeto(love, entretenimiento).
+
+% Tener - casi todo
+compatible_verbo_objeto(have, persona).
+compatible_verbo_objeto(have, animal).
+compatible_verbo_objeto(have, objeto_inanimado).
+compatible_verbo_objeto(have, abstracto).
+compatible_verbo_objeto(have, comida).
+compatible_verbo_objeto(have, bebida).
+
+% Querer - casi todo
+compatible_verbo_objeto(want, persona).
+compatible_verbo_objeto(want, animal).
+compatible_verbo_objeto(want, objeto_inanimado).
+compatible_verbo_objeto(want, abstracto).
+compatible_verbo_objeto(want, comida).
+compatible_verbo_objeto(want, bebida).
+compatible_verbo_objeto(want, entretenimiento).
+
+% Necesitar - casi todo
+compatible_verbo_objeto(need, persona).
+compatible_verbo_objeto(need, animal).
+compatible_verbo_objeto(need, objeto_inanimado).
+compatible_verbo_objeto(need, abstracto).
+compatible_verbo_objeto(need, comida).
+compatible_verbo_objeto(need, bebida).
+
+% Jugar - entretenimiento, objetos
+compatible_verbo_objeto(play, entretenimiento).
+compatible_verbo_objeto(play, objeto_inanimado).
+
+% Abrir/Cerrar - objetos físicos, lugares
+compatible_verbo_objeto(open, objeto_inanimado).
+compatible_verbo_objeto(open, lugar).
+compatible_verbo_objeto(close, objeto_inanimado).
+compatible_verbo_objeto(close, lugar).
+
+% Cocinar - comida
+compatible_verbo_objeto(cook, comida).
+
+% Cantar/Bailar - entretenimiento
+compatible_verbo_objeto(sing, entretenimiento).
+compatible_verbo_objeto(dance, entretenimiento).
+
+% Estudiar - objetos de estudio, abstractos
+compatible_verbo_objeto(study, objeto_inanimado).
+compatible_verbo_objeto(study, abstracto).
+
+% Trabajar - abstracto
+compatible_verbo_objeto(work, abstracto).
+
+% Escuchar/Hablar - personas, entretenimiento
+compatible_verbo_objeto(listen, persona).
+compatible_verbo_objeto(listen, entretenimiento).
+compatible_verbo_objeto(speak, persona).
