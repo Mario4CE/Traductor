@@ -9,7 +9,8 @@
     categoria_semantica/2,
     compatible_verbo_objeto/2,
     auxiliar_do_does_hacer/3,
-    auxiliar_have_has_tener/3
+    auxiliar_have_has_tener/3,
+    auxiliar_be/3
 ]).
 
 /* ============================
@@ -636,3 +637,9 @@ auxiliar_have_has_tener(singular, primera,  have).
 auxiliar_have_has_tener(singular, segunda,  have).
 auxiliar_have_has_tener(singular, tercera,  has).
 auxiliar_have_has_tener(plural,   _,        have).
+
+% auxiliar_be(Num, Per, Aux)
+auxiliar_be(singular, primera, am).
+auxiliar_be(singular, segunda, are).
+auxiliar_be(singular, tercera, is).
+auxiliar_be(plural,   _,        are).

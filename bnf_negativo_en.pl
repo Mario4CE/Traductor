@@ -19,7 +19,8 @@ oracion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Comp)))
     bnf_en:sujeto_en(Num, Per, Suj),
     [Aux, not],
       { auxiliar_do_does_hacer(Num, Per, Aux);
-         auxiliar_have_has_tener(Num, Per, Aux) },
+         auxiliar_have_has_tener(Num, Per, Aux);
+         auxiliar_be(Num, Per, Aux) },
     bnf_en:predicado_en(Num, Per, Verbo, Comp),
     { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) }.
 
@@ -30,7 +31,8 @@ oracion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Comp)))
 pregunta_negativa_en(auxiliar(Aux), sujeto(Num, Per, Suj), Verbo, Comp) -->
     [Aux],
     { auxiliar_do_does_hacer(Num, Per, Aux);
-      auxiliar_have_has_tener(Num, Per, Aux) },
+      auxiliar_have_has_tener(Num, Per, Aux);
+      auxiliar_be(Num, Per, Aux) },
     bnf_en:sujeto_en(Num, Per, Suj),
     [not],
     bnf_en:verbo_en(Num, Per, Verbo),
@@ -46,7 +48,8 @@ exclamacion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Com
     bnf_en:sujeto_en(Num, Per, Suj),
     [Aux, not],
       { auxiliar_do_does_hacer(Num, Per, Aux);
-         auxiliar_have_has_tener(Num, Per, Aux) },
+         auxiliar_have_has_tener(Num, Per, Aux);
+         auxiliar_be(Num, Per, Aux) },
     bnf_en:predicado_en(Num, Per, Verbo, Comp),
     { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) },
     ["!"].

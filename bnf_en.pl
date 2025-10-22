@@ -115,7 +115,8 @@ obtener_raiz_verbo_en(Verbo, Verbo).
 pregunta_en(auxiliar(Aux), sujeto(Num, Per, S), Verbo, Comp) -->
     [Aux],
     { auxiliar_do_does_hacer(Num, Per, Aux);
-      auxiliar_have_has_tener(Num, Per, Aux) },
+      auxiliar_have_has_tener(Num, Per, Aux);
+      auxiliar_be(Num, Per, Aux) },
     sujeto_en(Num, Per, S),
     verbo_en(Num, Per, Verbo),
     complemento_en(Comp),
@@ -131,7 +132,9 @@ pregunta_wh_en(WhWord, Aux, Sujeto, Verbo) -->
     [WhWord],
     { interrogativo(_, WhWord) },
     [Aux],
-    { member(Aux, [do, does]) },
+    { auxiliar_do_does_hacer(Num, Per, Aux);
+      auxiliar_have_has_tener(Num, Per, Aux);
+      auxiliar_be(Num, Per, Aux) },
     sujeto_en(singular, tercera, Sujeto),
     verbo_en(singular, tercera, Verbo),
     [?], !.
