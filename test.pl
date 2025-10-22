@@ -11,9 +11,9 @@
 /* === TESTS EXISTENTES (SIN CAMBIOS) === */
 
 test(declarativa_es_1) :-
-    phrase(oracion_es(S, P), [el, come, la, manzana]),
+    phrase(oracion_es(S, P), [el, bebe, la, manzana]),
     S == sujeto(singular, tercera, el),
-    P == predicado(verbo_objeto(come, articulo_sustantivo(la, manzana))).
+    P == predicado(verbo_objeto(bebe, articulo_sustantivo(la, manzana))).
 
 test(declarativa_en_1) :-
     phrase(oracion_en(S, P), [she, eat, the, apple]),
@@ -21,9 +21,9 @@ test(declarativa_en_1) :-
     P == predicado(verbo_objeto(eat, articulo_sustantivo(the, apple))).
 
 test(pregunta_es_1) :-  % ← MANTIENE 3 args
-    phrase(pregunta_es(S, V, C), ["¿", ella, come, manzanas, ?]),
+    phrase(pregunta_es(S, V, C), ["¿", ella, devora, manzanas, ?]),
     S == sujeto(singular, tercera, ella),
-    V == come,
+    V == devora,
     C == sustantivo_plural(manzanas).
 
 test(pregunta_en_1) :-  % ← MANTIENE 4 args

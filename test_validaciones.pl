@@ -12,9 +12,9 @@
 
 % Test 1: Artículo singular + sustantivo singular (CORRECTO)
 test_conjugacion_1 :-
-    write('Test 1: "el come la manzana" (artículo singular + sustantivo singular)'),
+    write('Test 1: "el devora la manzana" (artículo singular + sustantivo singular)'),
     nl,
-    (   phrase(oracion_es(_S, _P), [el, come, la, manzana])
+    (   phrase(oracion_es(_S, _P), [el, devorra, la, manzana])
     ->  write('  ✓ ACEPTADO'), nl
     ;   write('  ✗ RECHAZADO'), nl
     ), nl.

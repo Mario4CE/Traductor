@@ -41,12 +41,12 @@ pronombre(plural, tercera, femenino, ellas, they).
    ============================ */
 
 % === 1. eat - comer
-verbo(eat, singular, primera, como).
-verbo(eat, singular, segunda, comes).
-verbo(eat, singular, tercera, come).
-verbo(eat, plural, primera, comemos).
-verbo(eat, plural, segunda, comen).
-verbo(eat, plural, tercera, comen).
+verbo(eat, singular, primera, X) :- member(X, [como, devoro, ingiero]).
+verbo(eat, singular, segunda, X) :- member(X, [comes, devoras, ingieres]).
+verbo(eat, singular, tercera, X) :- member(X, [come, devora, ingiere]).
+verbo(eat, plural, primera, X) :- member(X, [comemos, devoramos, ingerimos]).
+verbo(eat, plural, segunda, X) :- member(X, [comen, devoran, ingieren]).
+verbo(eat, plural, tercera, X) :- member(X, [comen, devoran, ingieren]).
 
 % === 2. drink - beber
 verbo(drink, singular, primera, bebo).
@@ -73,20 +73,20 @@ verbo(come, plural, segunda, vienen).
 verbo(come, plural, tercera, vienen).
 
 % === 5. run - correr
-verbo(run, singular, primera, corro).
-verbo(run, singular, segunda, corres).
-verbo(run, singular, tercera, corre).
-verbo(run, plural, primera, corremos).
-verbo(run, plural, segunda, corren).
-verbo(run, plural, tercera, corren).
+verbo(run, singular, primera, X) :- member(X, [corro, sprinto]).
+verbo(run, singular, segunda, X) :- member(X, [corres, sprintas]).
+verbo(run, singular, tercera, X) :- member(X, [corre, sprinta]).
+verbo(run, plural, primera, X) :- member(X, [corremos, sprintamos]).
+verbo(run, plural, segunda, X) :- member(X, [corren, sprintan]).
+verbo(run, plural, tercera, X) :- member(X, [corren, sprintan]).
 
 % === 6. walk - caminar
-verbo(walk, singular, primera, camino).
-verbo(walk, singular, segunda, caminas).
-verbo(walk, singular, tercera, camina).
-verbo(walk, plural, primera, caminamos).
-verbo(walk, plural, segunda, caminan).
-verbo(walk, plural, tercera, caminan).
+verbo(walk, singular, primera, X) :- member(X, [camino, paseo]).
+verbo(walk, singular, segunda, X) :- member(X, [caminas, paseas]).
+verbo(walk, singular, tercera, X) :- member(X, [camina, pasea]).
+verbo(walk, plural, primera, X) :- member(X, [caminamos, paseamos]).
+verbo(walk, plural, segunda, X) :- member(X, [caminan, pasean]).
+verbo(walk, plural, tercera, X) :- member(X, [caminan, pasean]).
 
 % === 7. read - leer
 verbo(read, singular, primera, leo).
@@ -121,36 +121,36 @@ verbo(listen, plural, segunda, escuchan).
 verbo(listen, plural, tercera, escuchan).
 
 % === 11. see - ver
-verbo(see, singular, primera, veo).
-verbo(see, singular, segunda, ves).
-verbo(see, singular, tercera, ve).
-verbo(see, plural, primera, vemos).
-verbo(see, plural, segunda, ven).
-verbo(see, plural, tercera, ven).
+verbo(see, singular, primera, X) :- member(X, [veo, miro, odservo]).
+verbo(see, singular, segunda, X) :- member(X, [ves, miras, observas]).
+verbo(see, singular, tercera, X) :- member(X, [ve, mira, observa]).
+verbo(see, plural, primera, X) :- member(X, [vemos, miramos, observamos]).
+verbo(see, plural, segunda, X) :- member(X, [ven, miran, observan]).
+verbo(see, plural, tercera, X) :- member(X, [ven, miran, observan]).
 
 % === 12. look - mirar
-verbo(look, singular, primera, miro).
-verbo(look, singular, segunda, miras).
-verbo(look, singular, tercera, mira).
-verbo(look, plural, primera, miramos).
-verbo(look, plural, segunda, miran).
-verbo(look, plural, tercera, miran).
+verbo(look, singular, primera, X) :- member(X, [miro, miro, observo]).
+verbo(look, singular, segunda, X) :- member(X, [miras, miras, observas]).
+verbo(look, singular, tercera, X) :- member(X, [mira, mira, observa]).
+verbo(look, plural, primera, X) :- member(X, [miramos, miramos, observamos]).
+verbo(look, plural, segunda, X) :- member(X, [miran, miran, observan]).
+verbo(look, plural, tercera, X) :- member(X, [miran, miran, observan]).
 
 % === 13. love - amar
-verbo(love, singular, primera, amo).
-verbo(love, singular, segunda, amas).
-verbo(love, singular, tercera, ama).
-verbo(love, plural, primera, amamos).
-verbo(love, plural, segunda, aman).
-verbo(love, plural, tercera, aman).
+verbo(love, singular, primera, X) :- member(X, [amo, quiero, adoro]).
+verbo(love, singular, segunda, X) :- member(X, [amas, quieres, adoras]).
+verbo(love, singular, tercera, X) :- member(X, [ama, quiere, adora]).
+verbo(love, plural, primera, X) :- member(X, [amamos, queremos, adoramos]).
+verbo(love, plural, segunda, X) :- member(X, [aman, quieren, adoran]).
+verbo(love, plural, tercera, X) :- member(X, [aman, quieren, adoran]).
 
 % === 14. have - tener
-verbo(have, singular, primera, tengo).
-verbo(have, singular, segunda, tienes).
-verbo(have, singular, tercera, tiene).
-verbo(have, plural, primera, tenemos).
-verbo(have, plural, segunda, tienen).
-verbo(have, plural, tercera, tienen).
+verbo(have, singular, primera, X) :- member(X, [tengo, poseo, cuento_con]).
+verbo(have, singular, segunda, X) :- member(X, [tienes, posees, cuentas_con]).
+verbo(have, singular, tercera, X) :- member(X, [tiene, posee, cuenta_con]).
+verbo(have, plural, primera, X) :- member(X, [tenemos, poseemos, contamos_con]).
+verbo(have, plural, segunda, X) :- member(X, [tienen, poseen, cuentan_con]).
+verbo(have, plural, tercera, X) :- member(X, [tienen, poseen, cuentan_con]).
 
 % === 15. want - querer
 verbo(want, singular, primera, quiero).
@@ -201,20 +201,20 @@ verbo(cook, plural, segunda, cocinan).
 verbo(cook, plural, tercera, cocinan).
 
 % === 21. sing - cantar
-verbo(sing, singular, primera, canto).
-verbo(sing, singular, segunda, cantas).
-verbo(sing, singular, tercera, canta).
-verbo(sing, plural, primera, cantamos).
-verbo(sing, plural, segunda, cantan).
-verbo(sing, plural, tercera, cantan).
+verbo(sing, singular, primera, X):- member(X, [canto, entono]).
+verbo(sing, singular, segunda, X):- member(X, [cantas, entonas]).
+verbo(sing, singular, tercera, X):- member(X, [canta, entona]).
+verbo(sing, plural, primera, X):- member(X, [cantamos, entonamos]).
+verbo(sing, plural, segunda, X):- member(X, [cantan, entonan]).
+verbo(sing, plural, tercera, X):- member(X, [cantan, entonan]).
 
 % === 22. dance - bailar
-verbo(dance, singular, primera, bailo).
-verbo(dance, singular, segunda, bailas).
-verbo(dance, singular, tercera, baila).
-verbo(dance, plural, primera, bailamos).
-verbo(dance, plural, segunda, bailan).
-verbo(dance, plural, tercera, bailan).
+verbo(dance, singular, primera, X) :- member(X, [bailo, danzo]).
+verbo(dance, singular, segunda, X) :- member(X, [bailas, danzas]).
+verbo(dance, singular, tercera, X) :- member(X, [baila, danza]).
+verbo(dance, plural, primera, X) :- member(X, [bailamos, danzamos]).
+verbo(dance, plural, segunda, X) :- member(X, [bailan, danzan]).
+verbo(dance, plural, tercera, X) :- member(X, [bailan, danzan]).
 
 % === 23. sleep - dormir
 verbo(sleep, singular, primera, duermo).
@@ -250,16 +250,24 @@ objeto(singular, water, agua).
 objeto(singular, door, puerta).
 objeto(singular, window, ventana).
 objeto(singular, ball, pelota).
-objeto(singular, car, carro).
-objeto(singular, house, casa).
+objeto(singular, X, Y) :-
+    member(X, [car, automobile, vehicle]),
+    member(Y, [carro, coche, automovil]).
+objeto(singular, house, X):-
+    member(X, [casa, hogar, vivienda]).
 objeto(singular, table, mesa).
 objeto(singular, chair, silla).
 objeto(singular, pencil, lapiz).
-objeto(singular, pen, boligrafo).
+objeto(singular, pen, X) :-
+    member(X, [boligrafo, pluma, lapicero]).
 objeto(singular, school, escuela).
-objeto(singular, teacher, maestro).
-objeto(singular, student, estudiante).
-objeto(singular, phone, telefono).
+objeto(singular, teacher, X) :-
+    member(X, [maestro, profesor, docente]).
+objeto(singular, student, X) :-
+    member(X, [estudiante, alumno, aprendiz]).
+objeto(singular, X, Y) :-
+    member(X, [phone, mobile, cellphone, smartphone]),
+    member(Y, [telefono, movil, celular]).
 objeto(singular, bread, pan).
 objeto(singular, dog, perro).
 objeto(singular, cat, gato).
@@ -281,16 +289,24 @@ objeto(plural, waters, aguas).
 objeto(plural, doors, puertas).
 objeto(plural, windows, ventanas).
 objeto(plural, balls, pelotas).
-objeto(plural, cars, carros).
-objeto(plural, houses, casas).
+objeto(plural, X, Y) :-
+    member(X, [cars, automobiles, vehicles]),
+    member(Y, [carros, coches, automoviles]).
+objeto(plural, houses, X) :-
+    member(X, [casas, hogares, viviendas]).
 objeto(plural, tables, mesas).
 objeto(plural, chairs, sillas).
 objeto(plural, pencils, lapices).
-objeto(plural, pens, boligrafos).
+objeto(plural, pens, X) :-
+    member(X, [boligrafos, plumas, lapiceros]).
 objeto(plural, schools, escuelas).
-objeto(plural, teachers, maestros).
-objeto(plural, students, estudiantes).
-objeto(plural, phones, telefonos).
+objeto(plural, teachers, X) :-
+    member(X, [maestros, profesores, docentes]).
+objeto(plural, students, X) :-
+    member(X, [estudiantes, alumnos, aprendices]).
+objeto(plural, X, Y) :-
+    member(X, [phones, mobiles, cellphones, smartphones]),
+    member(Y, [telefonos, moviles, celulares]).
 objeto(plural, breads, panes).
 objeto(plural, dogs, perros).
 objeto(plural, cats, gatos).
