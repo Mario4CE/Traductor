@@ -1,12 +1,12 @@
 /* ======================================================
-   Gramática - Español (ARIDADES EXACTAS PARA TESTS)
+   Gramática - Español 
    ====================================================== */
 
 :- module(bnf_es, [
     oracion_es//2,
     pregunta_es//3,
-    pregunta_wh_es//4,   % Para test _1 (4 args)
-    pregunta_wh_es//3,   % Para test _2 y verifica (3 args)
+    pregunta_wh_es//4,   
+    pregunta_wh_es//3,   
     exclamacion_es//3
 ]).
 
