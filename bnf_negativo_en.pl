@@ -53,3 +53,24 @@ exclamacion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Com
     bnf_en:predicado_en(Num, Per, Verbo, Comp),
     { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) },
     ["!"].
+
+
+% ==========================
+% Preguntas wh negativas
+% ==========================
+% Ejemplo: Why does she not eat apples?
+%          What do they not like?
+%          Where is he not going?
+pregunta_wh_negativa_en(wh(WhWord), auxiliar(Aux), sujeto(Num, Per, Suj), verbo_objeto(Verbo, Comp)) -->
+    [WhWord],
+    { interrogativo(_, WhWord) },
+    [Aux],
+    { auxiliar_do_does_hacer(Num, Per, Aux);
+      auxiliar_have_has_tener(Num, Per, Aux);
+      auxiliar_be(Num, Per, Aux) },
+    bnf_en:sujeto_en(Num, Per, Suj),
+    [not],
+    bnf_en:verbo_en(Num, Per, Verbo),
+    bnf_en:complemento_en(Comp),
+    ["?"], 
+    { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) }, !.
