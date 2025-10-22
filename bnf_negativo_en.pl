@@ -17,7 +17,9 @@
 
 oracion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Comp))) -->
     bnf_en:sujeto_en(Num, Per, Suj),
-    [does, not],
+    [Aux, not],
+      { auxiliar_do_does_hacer(Num, Per, Aux);
+         auxiliar_have_has_tener(Num, Per, Aux) },
     bnf_en:predicado_en(Num, Per, Verbo, Comp),
     { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) }.
 
@@ -25,8 +27,10 @@ oracion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Comp)))
    Preguntas negativas
    ========================== */
 
-pregunta_negativa_en(auxiliar(does), sujeto(Num, Per, Suj), Verbo, Comp) -->
-    [does],
+pregunta_negativa_en(auxiliar(Aux), sujeto(Num, Per, Suj), Verbo, Comp) -->
+    [Aux],
+    { auxiliar_do_does_hacer(Num, Per, Aux);
+      auxiliar_have_has_tener(Num, Per, Aux) },
     bnf_en:sujeto_en(Num, Per, Suj),
     [not],
     bnf_en:verbo_en(Num, Per, Verbo),
@@ -40,7 +44,9 @@ pregunta_negativa_en(auxiliar(does), sujeto(Num, Per, Suj), Verbo, Comp) -->
 
 exclamacion_negativa_en(sujeto(Num, Per, Suj), predicado(verbo_objeto(Verbo, Comp))) -->
     bnf_en:sujeto_en(Num, Per, Suj),
-    [does, not],
+    [Aux, not],
+      { auxiliar_do_does_hacer(Num, Per, Aux);
+         auxiliar_have_has_tener(Num, Per, Aux) },
     bnf_en:predicado_en(Num, Per, Verbo, Comp),
     { bnf_en:validar_coherencia_semantica_en(Verbo, Comp) },
     ["!"].

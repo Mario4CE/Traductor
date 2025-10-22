@@ -7,7 +7,9 @@
     articulo/4,
     interrogativo/2,
     categoria_semantica/2,
-    compatible_verbo_objeto/2
+    compatible_verbo_objeto/2,
+    auxiliar_do_does_hacer/3,
+    auxiliar_have_has_tener/3
 ]).
 
 /* ============================
@@ -622,3 +624,15 @@ compatible_verbo_objeto(work, abstracto).
 compatible_verbo_objeto(listen, persona).
 compatible_verbo_objeto(listen, entretenimiento).
 compatible_verbo_objeto(speak, persona).
+
+% auxiliar_do_does_hacer(Num, Per, Aux)
+auxiliar_do_does_hacer(singular, primera,  do).
+auxiliar_do_does_hacer(singular, segunda,  do).
+auxiliar_do_does_hacer(singular, tercera,  does).
+auxiliar_do_does_hacer(plural,   _,        do).
+
+% auxiliar_have_has_tener(Num, Per, Aux)
+auxiliar_have_has_tener(singular, primera,  have).
+auxiliar_have_has_tener(singular, segunda,  have).
+auxiliar_have_has_tener(singular, tercera,  has).
+auxiliar_have_has_tener(plural,   _,        have).
