@@ -23,7 +23,8 @@ oracion_es(sujeto(Numero, Persona, Suj), predicado(verbo_objeto(Verbo, Comp))) -
 
 sujeto_es(Numero, Persona, Pron) --> 
     [Palabra], 
-    { pronombre(Numero, Persona, _, Palabra, _), Pron = Palabra }, !.
+    { pronombre(Numero, Persona, _, Palabra, _); pronombre_propio(Numero, Persona, _, Palabra, _),
+      Pron = Palabra }, !.
 
 sujeto_es(singular, tercera, Sust) --> 
     articulo_es(singular), 

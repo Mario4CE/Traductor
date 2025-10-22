@@ -24,7 +24,7 @@ oracion_en(sujeto(Num, Per, S), predicado(verbo_objeto(Verbo, Comp))) -->
 
 sujeto_en(Num, Per, Pron) -->
     [Palabra],
-    { pronombre(Num, Per, _, _, Palabra),
+    { pronombre(Num, Per, _, _, Palabra); pronombre_propio(Num, Per, _, Palabra, _),
       Pron = Palabra }, !.
 
 sujeto_en(singular, tercera, Sust) -->
