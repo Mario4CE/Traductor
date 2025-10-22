@@ -32,6 +32,19 @@ pronombre(plural, segunda, neutro, ustedes, you).
 pronombre(plural, tercera, masculino, ellos, they).
 pronombre(plural, tercera, femenino, ellas, they).
 
+% --- Sustantivos propios ---
+pronombre(singular, tercera, neutro, X, X) :-
+    member(X, [juan, maria, pedro, luisa, carlos, ana, laura]).
+pronombre(plural, tercera, neutro, X, X) :-
+    member(X, [juan_y_maria, pedro_y_luisa, carlos_y_ana, laura_y_ana]).
+pronombre(singular, tercera, femenino, X, X) :-
+    member(X, [ana, laura, maria, luisa]).
+pronombre(singular, tercera, masculino, X, X) :-
+    member(X, [juan, pedro, carlos, miguel]).
+pronombre(plural, tercera, femenino, X, X) :-
+    member(X, [maria_y_luisa, ana_y_laura]).
+pronombre(plural, tercera, masculino, X, X) :-
+    member(X, [juan_y_pedro, carlos_y_miguel]).
 
 /* ============================
    === Verbos ============
