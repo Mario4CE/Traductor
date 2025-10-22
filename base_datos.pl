@@ -147,7 +147,7 @@ verbo(love, plural, tercera, X) :- member(X, [aman, quieren, adoran]).
 % === 14. have - tener
 verbo(have, singular, primera, X) :- member(X, [tengo, poseo, cuento_con]).
 verbo(have, singular, segunda, X) :- member(X, [tienes, posees, cuentas_con]).
-verbo(have, singular, tercera, X) :- member(X, [tiene, posee, cuenta_con]).
+verbo(has, singular, tercera, X) :- member(X, [tiene, posee, cuenta_con]).
 verbo(have, plural, primera, X) :- member(X, [tenemos, poseemos, contamos_con]).
 verbo(have, plural, segunda, X) :- member(X, [tienen, poseen, cuentan_con]).
 verbo(have, plural, tercera, X) :- member(X, [tienen, poseen, cuentan_con]).
