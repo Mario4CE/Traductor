@@ -123,10 +123,10 @@ verbo(listen, plural, tercera, escuchan).
 % === 11. see - ver
 verbo(see, singular, primera, X) :- member(X, [veo, miro, odservo]).
 verbo(see, singular, segunda, X) :- member(X, [ves, miras, observas]).
-verbo(see, singular, tercera, X) :- member(X, [ve, mira, observa]).
-verbo(see, plural, primera, X) :- member(X, [vemos, miramos, observamos]).
-verbo(see, plural, segunda, X) :- member(X, [ven, miran, observan]).
-verbo(see, plural, tercera, X) :- member(X, [ven, miran, observan]).
+verbo(see, singular, tercera, X) :- member(X, [ve, mira, odserva]).
+verbo(see, plural, primera, X) :- member(X, [vemos, miramos, odservamos]).
+verbo(see, plural, segunda, X) :- member(X, [ven, miran, odservan]).
+verbo(see, plural, tercera, X) :- member(X, [ven, miran, odservan]).
 
 % === 12. look - mirar
 verbo(look, singular, primera, X) :- member(X, [miro, miro, observo]).
@@ -390,12 +390,24 @@ categoria_semantica(pelota, objeto_inanimado).
 categoria_semantica(pelotas, objeto_inanimado).
 categoria_semantica(car, objeto_inanimado).
 categoria_semantica(cars, objeto_inanimado).
+categoria_semantica(automobile, objeto_inanimado).
+categoria_semantica(automobiles, objeto_inanimado).
+categoria_semantica(vehicle, objeto_inanimado).
+categoria_semantica(vehicles, objeto_inanimado).
 categoria_semantica(carro, objeto_inanimado).
 categoria_semantica(carros, objeto_inanimado).
+categoria_semantica(coche, objeto_inanimado).
+categoria_semantica(coches, objeto_inanimado).
+categoria_semantica(automovil, objeto_inanimado).
+categoria_semantica(automoviles, objeto_inanimado).
 categoria_semantica(house, objeto_inanimado).
 categoria_semantica(houses, objeto_inanimado).
 categoria_semantica(casa, objeto_inanimado).
+categoria_semantica(hogar, objeto_inanimado).
+categoria_semantica(vivienda, objeto_inanimado).
 categoria_semantica(casas, objeto_inanimado).
+categoria_semantica(hogares, objeto_inanimado).
+categoria_semantica(viviendas, objeto_inanimado).
 categoria_semantica(table, objeto_inanimado).
 categoria_semantica(tables, objeto_inanimado).
 categoria_semantica(mesa, objeto_inanimado).
@@ -410,12 +422,26 @@ categoria_semantica(lapiz, objeto_inanimado).
 categoria_semantica(lapices, objeto_inanimado).
 categoria_semantica(pen, objeto_inanimado).
 categoria_semantica(pens, objeto_inanimado).
+categoria_semantica(pluma, objeto_inanimado).
+categoria_semantica(plumas, objeto_inanimado).
+categoria_semantica(lapicero, objeto_inanimado).
+categoria_semantica(lapiceros, objeto_inanimado).
 categoria_semantica(boligrafo, objeto_inanimado).
 categoria_semantica(boligrafos, objeto_inanimado).
 categoria_semantica(phone, objeto_inanimado).
 categoria_semantica(phones, objeto_inanimado).
+categoria_semantica(mobile, objeto_inanimado).
+categoria_semantica(mobiles, objeto_inanimado).
+categoria_semantica(cellphone, objeto_inanimado).
+categoria_semantica(cellphones, objeto_inanimado).
+categoria_semantica(smartphone, objeto_inanimado).
+categoria_semantica(smartphones, objeto_inanimado).
 categoria_semantica(telefono, objeto_inanimado).
 categoria_semantica(telefonos, objeto_inanimado).
+categoria_semantica(movil, objeto_inanimado).
+categoria_semantica(moviles, objeto_inanimado).
+categoria_semantica(celular, objeto_inanimado).
+categoria_semantica(celulares, objeto_inanimado).
 categoria_semantica(computer, objeto_inanimado).
 categoria_semantica(computers, objeto_inanimado).
 categoria_semantica(computadora, objeto_inanimado).
@@ -449,7 +475,15 @@ categoria_semantica(gatos, animal).
 categoria_semantica(teacher, persona).
 categoria_semantica(teachers, persona).
 categoria_semantica(maestro, persona).
+categoria_semantica(profesor, persona).
+categoria_semantica(docente, persona).
+categoria_semantica(profesores, persona).
 categoria_semantica(maestros, persona).
+categoria_semantica(docentes, persona).
+categoria_semantica(alumno, persona).
+categoria_semantica(alumnos, persona).
+categoria_semantica(aprendiz, persona).
+categoria_semantica(aprendices, persona).
 categoria_semantica(student, persona).
 categoria_semantica(students, persona).
 categoria_semantica(estudiante, persona).
