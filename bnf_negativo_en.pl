@@ -5,7 +5,8 @@
 :- module(bnf_negativo_en, [
     oracion_negativa_en//2,
     pregunta_negativa_en//4,      
-    exclamacion_negativa_en//2
+    exclamacion_negativa_en//2,
+    pregunta_wh_negativa_en//4
 ]).
 
 :- use_module(bnf_en).

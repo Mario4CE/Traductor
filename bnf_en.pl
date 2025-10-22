@@ -140,9 +140,9 @@ pregunta_wh_en(WhWord, Aux, Sujeto, Verbo) -->
     [?], !.
 
 % Who eats apples? → pregunta_wh_en(who, eats, apples, _)
-pregunta_wh_en(who, Verbo, Comp, _) -->
-    [who],
-    { interrogativo(_, who) },
+pregunta_wh_en(Who, Verbo, Comp, _) -->
+    [Who],
+    { interrogativo(_, Who) },
     verbo_en(singular, tercera, Verbo),
     complemento_en(Comp),
     { validar_coherencia_semantica_en(Verbo, Comp) },
