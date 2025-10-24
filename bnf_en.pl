@@ -82,7 +82,7 @@ sustantivo_plural_en(SustP) -->
 
 /* ========= Verbos (CON MANEJO ESPECIAL PARA 'eats') ========= */
 
-verbo_en(singular, tercera, eats) -->
+verbo_en(singular, tercera, eat) -->
     [eats],
     { verbo(eat, singular, tercera, _) }, !.
 

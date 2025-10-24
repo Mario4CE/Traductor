@@ -13,6 +13,7 @@
     auxiliar_be/3
 ]).
 
+
 /* ============================
    === Pronombres ============
    pronombre(Número, Persona, Género, Español, Inglés)
@@ -20,11 +21,12 @@
    Persona = primera | segunda | tercera
    ============================ */
 
+
 % --- Singular ---
 pronombre(singular, primera, neutro, yo, i).
 pronombre(singular, segunda, neutro, tu, you).
-pronombre(singular, tercera, masculino, el, he).
-pronombre(singular, tercera, femenino, ella, she).
+pronombre(singular, tercera, _, ella, she).
+pronombre(singular, tercera, _, el,   he).
 pronombre(singular, tercera, neutro, eso, it).
 pronombre(singular, tercera, neutro, usted, you).
 pronombre(singular, tercera, neutro, ello, it).
@@ -36,19 +38,6 @@ pronombre(plural, segunda, neutro, ustedes, you).
 pronombre(plural, tercera, masculino, ellos, they).
 pronombre(plural, tercera, femenino, ellas, they).
 
-% --- Sustantivos propios ---
-pronombre_propio(singular, tercera, neutro, X, X) :-
-    member(X, [juan, maria, pedro, luisa, carlos, ana, laura]).
-pronombre_propio(plural, tercera, neutro, X, X) :-
-    member(X, [juan_y_maria, pedro_y_luisa, carlos_y_ana, laura_y_ana]).
-pronombre_propio(singular, tercera, femenino, X, X) :-
-    member(X, [ana, laura, maria, luisa]).
-pronombre_propio(singular, tercera, masculino, X, X) :-
-    member(X, [juan, pedro, carlos, miguel]).
-pronombre_propio(plural, tercera, femenino, X, X) :-
-    member(X, [maria_y_luisa, ana_y_laura]).
-pronombre_propio(plural, tercera, masculino, X, X) :-
-    member(X, [juan_y_pedro, carlos_y_miguel]).
 
 /* ============================
    === Verbos ============
@@ -57,6 +46,7 @@ pronombre_propio(plural, tercera, masculino, X, X) :-
    Numero = singular | plural
    ============================ */
 
+% Agregar formas conjugadas en inglés para tercera persona singular
 % === 1. eat - comer
 verbo(eat, singular, primera, X) :- member(X, [como, devoro, ingiero]).
 verbo(eat, singular, segunda, X) :- member(X, [comes, devoras, ingieres]).
@@ -138,12 +128,12 @@ verbo(listen, plural, segunda, escuchan).
 verbo(listen, plural, tercera, escuchan).
 
 % === 11. see - ver
-verbo(see, singular, primera, X) :- member(X, [veo, miro, odservo]).
+verbo(see, singular, primera, X) :- member(X, [veo, miro, observo]).
 verbo(see, singular, segunda, X) :- member(X, [ves, miras, observas]).
-verbo(see, singular, tercera, X) :- member(X, [ve, mira, odserva]).
-verbo(see, plural, primera, X) :- member(X, [vemos, miramos, odservamos]).
-verbo(see, plural, segunda, X) :- member(X, [ven, miran, odservan]).
-verbo(see, plural, tercera, X) :- member(X, [ven, miran, odservan]).
+verbo(see, singular, tercera, X) :- member(X, [ve, mira, observa]).
+verbo(see, plural, primera, X) :- member(X, [vemos, miramos, observamos]).
+verbo(see, plural, segunda, X) :- member(X, [ven, miran, observan]).
+verbo(see, plural, tercera, X) :- member(X, [ven, miran, observan]).
 
 % === 12. look - mirar
 verbo(look, singular, primera, X) :- member(X, [miro, miro, observo]).
@@ -161,10 +151,11 @@ verbo(love, plural, primera, X) :- member(X, [amamos, queremos, adoramos]).
 verbo(love, plural, segunda, X) :- member(X, [aman, quieren, adoran]).
 verbo(love, plural, tercera, X) :- member(X, [aman, quieren, adoran]).
 
+% Corregir verbo "have" - la raíz debe ser "have" para todas las personas excepto tercera singular
 % === 14. have - tener
 verbo(have, singular, primera, X) :- member(X, [tengo, poseo, cuento_con]).
 verbo(have, singular, segunda, X) :- member(X, [tienes, posees, cuentas_con]).
-verbo(has, singular, tercera, X) :- member(X, [tiene, posee, cuenta_con]).
+verbo(have, singular, tercera, X) :- member(X, [tiene, posee, cuenta_con]).
 verbo(have, plural, primera, X) :- member(X, [tenemos, poseemos, contamos_con]).
 verbo(have, plural, segunda, X) :- member(X, [tienen, poseen, cuentan_con]).
 verbo(have, plural, tercera, X) :- member(X, [tienen, poseen, cuentan_con]).
@@ -298,9 +289,13 @@ objeto(singular, movie, pelicula).
 objeto(singular, song, cancion).
 objeto(singular, game, juego).
 objeto(singular, computer, computadora).
+objeto_genero(manzana, femenino).
+objeto_genero(niño, masculino).
+objeto_genero(niña, femenino).
+
 
 % --- Plural ---
-objeto(plural, apples, manzanas).
+objeto(plural,   apples, manzanas).
 objeto(plural, books, libros).
 objeto(plural, waters, aguas).
 objeto(plural, doors, puertas).
@@ -538,6 +533,10 @@ categoria_semantica(juegos, entretenimiento).
    Define qué verbos son compatibles con qué categorías
    ============================ */
 
+compatible_verbo_objeto(run, lugar).
+compatible_verbo_objeto(go, lugar).
+compatible_verbo_objeto(walk, lugar).
+ 
 % Comer - solo comida/bebida
 compatible_verbo_objeto(eat, comida).
 compatible_verbo_objeto(eat, bebida).
@@ -546,7 +545,7 @@ compatible_verbo_objeto(eat, bebida).
 compatible_verbo_objeto(drink, bebida).
 
 % Leer - objetos con texto
-compatible_verbo_objeto(read, objeto_inanimado).  % libros, etc.
+compatible_verbo_objeto(read, objeto_inanimado).
 compatible_verbo_objeto(read, entretenimiento).
 
 % Escribir - puede escribir objetos
